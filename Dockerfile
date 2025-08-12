@@ -16,3 +16,4 @@ WORKDIR /usr/src/app
 COPY --from=build /usr/src/app/build ./build
 RUN npm i -g serve
 CMD ["serve", "-s", "build"]
+EXPOSE 3000
