@@ -39,5 +39,5 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             docker pull bhardwajcr7/docker-app:latest
-            docker stop your-app || true && docker rm your-app || true
+            docker stop docker-app || true && docker rm docker-app || true
             docker run -d --name docker-app -p 80:80 bhardwajcr7/docker-app:latest
