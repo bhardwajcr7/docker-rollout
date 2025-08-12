@@ -31,6 +31,15 @@ jobs:
           push: true
           tags: bhardwajcr7/docker-app:latest
 
+      - name: Copy docker-compose.yaml to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "docker-compose.yaml"
+          target: "/root/"
+
       - name: Deploy on EC2 via SSH
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -38,6 +47,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            docker pull bhardwajcr7/docker-app:latest
+#            docker pull bhardwajcr7/docker-app:latest
             docker stop docker-app || true && docker rm docker-app || true
-            docker run -d --name docker-app -p 80:3000 bhardwajcr7/docker-app:latest
+#            docker run -d --name docker-app -p 80:3000 bhardwajcr7/docker-app:latest
+            docker-compose up -d

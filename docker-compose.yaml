@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  docker-app:
+    image: bhardwajcr7/docker-app:latest
+    ports:
+      - "80:3000"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 5s
+      timeout: 2s
+      retries: 3
