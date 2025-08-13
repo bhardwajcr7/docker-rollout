@@ -47,5 +47,6 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            docker pull bhardwajcr7/docker-app
             docker stop docker-app || true && docker rm docker-app || true
             docker-compose up -d
